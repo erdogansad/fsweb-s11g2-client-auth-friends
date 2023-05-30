@@ -8,6 +8,9 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    fetchStatus: (state) => {
+      if (localStorage.getItem("token")) state.isLoggedIn = true;
+    },
     setStatus: (state, action) => {
       state.isLoggedIn = action.payload;
     },
@@ -16,4 +19,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { setStatus } = userSlice.actions;
+export const { fetchStatus, setStatus } = userSlice.actions;

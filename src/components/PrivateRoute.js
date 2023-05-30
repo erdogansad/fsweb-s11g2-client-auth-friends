@@ -1,8 +1,9 @@
+import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem("token");
-  return token ? children : <Redirect push to="/login" />;
+  const { isLoggedIn } = useSelector((store) => store.user);
+  return isLoggedIn ? children : <Redirect push to="/login" />;
 };
 
 export default PrivateRoute;

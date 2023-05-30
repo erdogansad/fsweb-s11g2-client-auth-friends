@@ -7,15 +7,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import Logout from "./components/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setStatus } from "./redux/slices/userSlice";
+import { fetchStatus } from "./redux/slices/userSlice";
 
 function App() {
   const { isLoggedIn } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    localStorage.getItem("token") && dispatch(setStatus(true));
-  }, [dispatch]);
+  useEffect(() => dispatch(fetchStatus()), [dispatch]);
 
   return (
     <>
