@@ -1,4 +1,4 @@
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Redirect } from "react-router-dom";
 
 import Login from "./components/Login";
 import AddFriend from "./components/AddFriend";
@@ -13,7 +13,9 @@ function App() {
   const { isLoggedIn } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(fetchStatus()), [dispatch]);
+  useEffect(() => {
+    dispatch(fetchStatus());
+  }, [dispatch]);
 
   return (
     <>
@@ -36,7 +38,7 @@ function App() {
         </div>
       </div>
       <Route exact path="/login">
-        <Login />
+        {isLoggedIn ? <Redirect path to="/friends" replace /> : <Login />}
       </Route>
       <Route exact path="/logout">
         <Logout />
